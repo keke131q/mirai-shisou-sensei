@@ -29,22 +29,31 @@
             font-family: 'Noto Sans JP', sans-serif;
             color: var(--text-main);
             line-height: 1.6;
-            /* 立山連峰の画像URLをご自身の写真等に変更してください */
+        }
+
+        /* --- スマホ(iOS)でも背景が綺麗に表示されるための設定 --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            /* ▼ 背景画像：必要に応じて立山連峰の画像URLに変更してください ▼ */
             background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            z-index: -1;
         }
 
+        /* --- メインコンテナ --- */
         .container {
             max-width: 480px;
-            margin: 0 auto;
+            width: 92%; /* スマホの左右に少し隙間を作り、背景の山を見せる */
+            margin: 3vh auto;
+            border-radius: 20px; /* カードを角丸にする */
             /* グラスモーフィズム（すりガラス効果） */
             background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            min-height: 100vh;
-            box-shadow: 0 0 25px rgba(0, 90, 156, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 90, 156, 0.2);
             padding-bottom: 3rem;
             position: relative;
             overflow: hidden;
@@ -52,38 +61,53 @@
 
         .hero {
             position: relative;
-            padding: 3rem 1.5rem 2rem;
+            padding: 3.5rem 1.5rem 2.5rem;
             text-align: center;
             border-bottom: 4px solid var(--sky-blue);
         }
 
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #fff;
             box-shadow: 0 5px 15px rgba(0, 90, 156, 0.15);
             margin-bottom: 1rem;
-            background-color: var(--sky-blue);
-            background-image: url('https://via.placeholder.com/150/4FC3F7/FFFFFF?text=Profile'); 
+            background-color: var(--bg-light);
+            /* ▼ ご指定の添付写真 ▼ */
+            background-image: url('スクリーンショット 2026-04-22 10.46.41.png'); 
             background-size: cover;
             background-position: center;
             position: relative;
             z-index: 2;
         }
 
+        .hero-catch {
+            font-size: 0.9rem;
+            color: var(--accent-sun);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
         .hero-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 900;
             color: var(--primary-blue);
             margin-bottom: 0.2rem;
             letter-spacing: 0.05em;
+            line-height: 1.3;
+        }
+
+        .hero-title .name-sub {
+            font-size: 1rem;
+            color: #555;
+            font-weight: 700;
         }
 
         .hero-subtitle {
-            font-size: 0.85rem;
-            color: var(--accent-sun);
+            font-size: 1rem;
+            color: var(--primary-blue);
             font-weight: 700;
             margin-bottom: 1.2rem;
         }
@@ -94,15 +118,26 @@
             text-align: justify;
             text-justify: inter-ideograph;
             padding: 0 0.5rem;
+            line-height: 1.8;
         }
 
-        .sns-container {
+        /* --- SNSアイコンセクション --- */
+        .sns-wrapper {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: -1.5rem auto 2.5rem;
+            gap: 1.2rem;
+            margin: -2rem auto 2.5rem;
             position: relative;
             z-index: 10;
+            padding: 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .sns-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
         }
 
         .sns-btn {
@@ -124,7 +159,16 @@
         .sns-line { background-color: var(--color-line); }
         .sns-facebook { background-color: var(--color-facebook); }
         .sns-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        
+        .sns-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-align: center;
+            line-height: 1.2;
+        }
 
+        /* --- リンクボタン一覧 --- */
         .links-container {
             padding: 0 1.5rem;
             display: flex;
@@ -138,7 +182,7 @@
             justify-content: flex-start;
             width: 100%;
             padding: 1.2rem 1rem;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             color: var(--primary-blue);
             text-decoration: none;
             font-weight: 700;
@@ -198,20 +242,42 @@
     <div class="container">
         <!-- ファーストビュー（自己紹介） -->
         <header class="hero">
-            <div class="profile-img"></div>
-            <h1 class="hero-title">岡本 奎一</h1>
-            <p class="hero-subtitle">未来志創 / 子育てコーチング</p>
+            <div class="profile-img" aria-label="写真 岡本 奎一"></div>
+            
+            <p class="hero-catch">輝く未来を支える先生</p>
+            <h1 class="hero-title">けいいち先生<br><span class="name-sub">(岡本 奎一)</span></h1>
+            <p class="hero-subtitle">未来志創プロジェクト</p>
+            
             <p class="hero-desc">
-                元公立中学校教員10年。<br>
-                「愛情の掛け違い」による親子のすれ違いをなくすため独立。素質論とメンタルコーチングを掛け合わせ、悩み苦しむ親御さんの『安全基地』を作る伴走者です。すべての子どもたちが自分の価値を信じ、志を持って生きられる社会を創ります。
+                元富山市中学校教員10年。<br>
+                親子の想いのすれ違いをなくしたいと想い独立。素質論や脳科学を用いて、子育てに悩み苦しむ親御さんを支える伴走者です。<br>
+                親も子も学校の先生も、自分の価値や可能性、尊さに気付き、自分らしく生きられる社会を創ることをミッションに活動中。
             </p>
         </header>
 
         <!-- SNSアイコンリンク -->
-        <div class="sns-container">
-            <a href="https://www.instagram.com/mirai_shisou_oka" class="sns-btn sns-instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/keiichi.okamoto.14/?locale=ja_JP" class="sns-btn sns-facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://line.me/ti/p/6AKpIs5PKO" class="sns-btn sns-line" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i></a>
+        <div class="sns-wrapper">
+            <!-- インスタ(左)：けいいち先生 -->
+            <div class="sns-item">
+                <a href="https://www.instagram.com/mirai_shisou_oka" class="sns-btn sns-instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <span class="sns-label">けいいち先生</span>
+            </div>
+            
+            <!-- インスタ(右)：野球クラブ -->
+            <div class="sns-item">
+                <a href="https://www.instagram.com/toyama_seibu_bc/" class="sns-btn sns-instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <span class="sns-label">野球クラブ</span>
+            </div>
+
+            <div class="sns-item">
+                <a href="https://www.facebook.com/keiichi.okamoto.14/?locale=ja_JP" class="sns-btn sns-facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                <span class="sns-label">Facebook</span>
+            </div>
+
+            <div class="sns-item">
+                <a href="https://line.me/ti/p/6AKpIs5PKO" class="sns-btn sns-line" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i></a>
+                <span class="sns-label">LINE</span>
+            </div>
         </div>
 
         <!-- リンクボタン一覧 -->
@@ -230,6 +296,11 @@
             </a>
 
             <!-- ＜ノーマル＞ -->
+            <a href="#" class="link-btn">
+                <i class="fas fa-id-card"></i>
+                BNI GAINSシート
+            </a>
+
             <a href="#" class="link-btn">
                 <i class="fas fa-heart"></i>
                 心の翻訳術❣️子育てコミュニケーション支援
