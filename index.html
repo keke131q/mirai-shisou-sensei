@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>岡本 奎一 | 未来志創プロジェクト</title>
+    <title>岡本 奎一 | 未来志創</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     
@@ -12,7 +12,7 @@
             --primary-blue: #005A9C;
             --sky-blue: #4FC3F7;
             --accent-sun: #F39C12;
-            --bg-light: rgba(240, 248, 255, 0.85); /* 透ける背景 */
+            --bg-light: rgba(240, 248, 255, 0.85);
             --text-main: #333333;
             --color-line: #06C755;
             --color-facebook: #1877F2;
@@ -29,7 +29,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             color: var(--text-main);
             line-height: 1.6;
-            /* ▼ 背景画像：立山連峰の画像URLをご自身の写真等に変更してください ▼ */
+            /* 立山連峰の画像URLをご自身の写真等に変更してください */
             background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -135,7 +135,7 @@
         .link-btn {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
             padding: 1.2rem 1rem;
             background-color: rgba(255, 255, 255, 0.9);
@@ -150,7 +150,7 @@
         }
 
         .link-btn i {
-            margin-right: 0.6rem;
+            margin-right: 0.8rem;
             font-size: 1.2rem;
             color: var(--sky-blue);
             width: 24px;
@@ -217,32 +217,37 @@
         <!-- リンクボタン一覧 -->
         <div class="links-container">
             
-            <!-- ①遷移先の講演会LPへ繋がるボタン -->
-            <a href="matsuri.html" class="link-btn sun">
+            <!-- ＜最も強調＞ -->
+            <a href="https://note.com/mirai_shisou/n/ne5816efc7a19" class="link-btn sun" target="_blank" rel="noopener noreferrer">
                 <i class="fas fa-fire"></i>
                 【8/1 開催】誇高MATSURI in 富山
             </a>
 
-            <!-- ②メイン事業 -->
+            <!-- ＜強調＞ -->
             <a href="#" class="link-btn highlight">
-                <i class="fas fa-seedling"></i>
-                子育て・夫婦の伴走支援プログラム
+                <i class="fas fa-shoe-prints"></i>
+                けいいち先生のあゆみ
             </a>
 
-            <!-- ③その他の活動 -->
+            <!-- ＜ノーマル＞ -->
             <a href="#" class="link-btn">
+                <i class="fas fa-heart"></i>
+                心の翻訳術❣️子育てコミュニケーション支援
+            </a>
+
+            <a href="https://canva.link/iy3qoprnttvbpts" class="link-btn" target="_blank" rel="noopener noreferrer">
                 <i class="fas fa-comments"></i>
-                【単発】素質論 個別アドバイス
+                【単発】素質論アドバイス
+            </a>
+
+            <a href="https://www.kokorozashi-academy.com/" class="link-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-compass"></i>
+                こころざしの学校
             </a>
 
             <a href="#" class="link-btn">
                 <i class="fas fa-school"></i>
                 オンライン寺子屋「ほーむBASE」
-            </a>
-
-            <a href="https://www.kokorozashi-academy.com/" class="link-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-compass"></i>
-                志の学校
             </a>
 
             <a href="https://www.instagram.com/toyama_seibu_bc/" class="link-btn" target="_blank" rel="noopener noreferrer">
@@ -252,7 +257,7 @@
 
             <a href="https://jp.mercari.com/user/profile/438724002" class="link-btn" target="_blank" rel="noopener noreferrer">
                 <i class="fas fa-shirt"></i>
-                古着屋MEGURI (Mercari)
+                古着屋MEGURI
             </a>
             
         </div>
