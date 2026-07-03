@@ -29,34 +29,45 @@
             font-family: 'Noto Sans JP', sans-serif;
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- スマホ(iOS)でも背景が綺麗に表示されるための設定 --- */
+        /* --- 背景を「立山連邦.JPG」に指定 & ゆっくり動くアニメーション --- */
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            /* ▼ 背景画像：必要に応じて立山連峰の画像URLに変更してください ▼ */
-            background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop');
+            top: -5%; left: -5%; width: 110vw; height: 110vh;
+            background-image: url('立山連邦.JPG');
             background-size: cover;
             background-position: center;
             z-index: -1;
+            animation: bgZoom 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes bgZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
 
         /* --- メインコンテナ --- */
         .container {
             max-width: 480px;
-            width: 92%; /* スマホの左右に少し隙間を作り、背景の山を見せる */
+            width: 92%;
             margin: 3vh auto;
-            border-radius: 20px; /* カードを角丸にする */
-            /* グラスモーフィズム（すりガラス効果） */
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 90, 156, 0.2);
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 15px 35px rgba(0, 90, 156, 0.25);
             padding-bottom: 3rem;
             position: relative;
             overflow: hidden;
+            animation: fadeInContainer 1s ease-out;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero {
@@ -66,28 +77,37 @@
             border-bottom: 4px solid var(--sky-blue);
         }
 
+        /* プロフィール画像の光る波紋アニメーション */
         .profile-img {
             width: 130px;
             height: 130px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0, 90, 156, 0.15);
+            box-shadow: 0 5px 20px rgba(0, 90, 156, 0.2);
             margin-bottom: 1rem;
             background-color: var(--bg-light);
-            /* ▼ ご指定の添付写真 ▼ */
             background-image: url('スクリーンショット 2026-04-22 10.46.41.png'); 
             background-size: cover;
             background-position: center;
             position: relative;
             z-index: 2;
+            margin-left: auto;
+            margin-right: auto;
+            animation: profileFloat 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes profileFloat {
+            0% { transform: translateY(0px); box-shadow: 0 5px 20px rgba(0, 90, 156, 0.2); }
+            100% { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(0, 90, 156, 0.35); }
         }
 
         .hero-catch {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--accent-sun);
             font-weight: 700;
             margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
         }
 
         .hero-title {
@@ -138,11 +158,22 @@
             flex-direction: column;
             align-items: center;
             gap: 6px;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+        }
+
+        .sns-item:nth-child(1) { animation-delay: 0.2s; }
+        .sns-item:nth-child(2) { animation-delay: 0.3s; }
+        .sns-item:nth-child(3) { animation-delay: 0.4s; }
+        .sns-item:nth-child(4) { animation-delay: 0.5s; }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .sns-btn {
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -151,10 +182,11 @@
             color: #fff;
             font-size: 1.6rem;
             box-shadow: 0 5px 15px rgba(0, 90, 156, 0.15);
-            transition: transform 0.2s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 2px solid #fff;
         }
 
+        .sns-btn:hover { transform: translateY(-4px) scale(1.05); }
         .sns-btn:active { transform: scale(0.9); }
         .sns-line { background-color: var(--color-line); }
         .sns-facebook { background-color: var(--color-facebook); }
@@ -186,19 +218,50 @@
             color: var(--primary-blue);
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border: 2px solid rgba(79, 195, 247, 0.3);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 90, 156, 0.05);
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 12px rgba(0, 90, 156, 0.06);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: slideUpBtn 0.6s ease forwards;
+        }
+
+        /* スタッガリング（順番に浮き出る）設定 */
+        .link-btn:nth-child(1) { animation-delay: 0.3s; }
+        .link-btn:nth-child(2) { animation-delay: 0.4s; }
+        .link-btn:nth-child(3) { animation-delay: 0.5s; }
+        .link-btn:nth-child(4) { animation-delay: 0.6s; }
+        .link-btn:nth-child(5) { animation-delay: 0.7s; }
+        .link-btn:nth-child(6) { animation-delay: 0.8s; }
+        .link-btn:nth-child(7) { animation-delay: 0.9s; }
+        .link-btn:nth-child(8) { animation-delay: 1.0s; }
+        .link-btn:nth-child(9) { animation-delay: 1.1s; }
+
+        @keyframes slideUpBtn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .link-btn i {
             margin-right: 0.8rem;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--sky-blue);
-            width: 24px;
+            width: 26px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 90, 156, 0.12);
+            border-color: var(--sky-blue);
+        }
+
+        .link-btn:hover i {
+            transform: scale(1.2) rotate(-5deg);
         }
 
         .link-btn:active {
@@ -206,27 +269,100 @@
             transform: scale(0.98);
         }
 
+        /* ＜強調＞ ボタン */
         .link-btn.highlight {
             background-color: var(--primary-blue);
             color: #fff;
             border: none;
-            box-shadow: 0 5px 15px rgba(0, 90, 156, 0.2);
+            box-shadow: 0 6px 18px rgba(0, 90, 156, 0.25);
         }
         .link-btn.highlight i { color: var(--sky-blue); }
 
+        /* ＜最も強調＞ ボタン */
         .link-btn.sun {
             background: linear-gradient(135deg, #F5AF19 0%, #F12711 100%);
             color: #fff;
             border: none;
-            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
-            animation: pulse-shadow 2s infinite;
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.35);
+            animation: pulse-shadow 2s infinite, slideUpBtn 0.6s ease forwards;
         }
         .link-btn.sun i { color: #fff; }
 
+        /* ボタンに光が走るシャインエフェクト */
+        .link-btn.sun::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0%, 75% { left: -100%; }
+            100% { left: 200%; }
+        }
+
         @keyframes pulse-shadow {
-            0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.5); }
+            70% { box-shadow: 0 0 0 12px rgba(243, 156, 18, 0); }
             100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+        }
+
+        /* 準備中テキストのデザイン */
+        .badge-ready {
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: normal;
+        }
+
+        /* --- 動画ポップアップモーダル --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 600px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px; right: 15px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(0,0,0,0.5);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+
+        video {
+            width: 100%;
+            display: block;
         }
 
         footer {
@@ -257,23 +393,18 @@
 
         <!-- SNSアイコンリンク -->
         <div class="sns-wrapper">
-            <!-- インスタ(左)：けいいち先生 -->
             <div class="sns-item">
                 <a href="https://www.instagram.com/mirai_shisou_oka" class="sns-btn sns-instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                 <span class="sns-label">けいいち先生</span>
             </div>
-            
-            <!-- インスタ(右)：野球クラブ -->
             <div class="sns-item">
                 <a href="https://www.instagram.com/toyama_seibu_bc/" class="sns-btn sns-instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                 <span class="sns-label">野球クラブ</span>
             </div>
-
             <div class="sns-item">
                 <a href="https://www.facebook.com/keiichi.okamoto.14/?locale=ja_JP" class="sns-btn sns-facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
                 <span class="sns-label">Facebook</span>
             </div>
-
             <div class="sns-item">
                 <a href="https://line.me/ti/p/6AKpIs5PKO" class="sns-btn sns-line" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i></a>
                 <span class="sns-label">LINE</span>
@@ -285,58 +416,89 @@
             
             <!-- ＜最も強調＞ -->
             <a href="https://note.com/mirai_shisou/n/ne5816efc7a19" class="link-btn sun" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-fire"></i>
-                【8/1 開催】誇高MATSURI in 富山
+                <i class="fas fa-fire"></i>【8/1 開催】誇高MATSURI in 富山
             </a>
 
-            <!-- ＜強調＞ -->
-            <a href="#" class="link-btn highlight">
-                <i class="fas fa-shoe-prints"></i>
-                けいいち先生のあゆみ
+            <!-- ＜強調＞ タップでポップアップ動画を自動再生 -->
+            <a href="自己紹介動画.mp4" class="link-btn highlight" id="video-trigger">
+                <i class="fas fa-play-circle"></i>けいいち先生のあゆみ
             </a>
 
             <!-- ＜ノーマル＞ -->
             <a href="#" class="link-btn">
-                <i class="fas fa-id-card"></i>
-                BNI GAINSシート
+                <i class="fas fa-briefcase"></i>事業紹介 <span class="badge-ready">(準備中)</span>
             </a>
 
             <a href="#" class="link-btn">
-                <i class="fas fa-heart"></i>
-                心の翻訳術❣️子育てコミュニケーション支援
+                <i class="fas fa-heart"></i>心の翻訳術❣️子育てコミュニケーション支援 <span class="badge-ready">(準備中)</span>
             </a>
 
             <a href="https://canva.link/iy3qoprnttvbpts" class="link-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-comments"></i>
-                素質論アドバイス
+                <i class="fas fa-comments"></i>素質論アドバイス
             </a>
 
             <a href="https://www.kokorozashi-academy.com/" class="link-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-compass"></i>
-                こころざしの学校
+                <i class="fas fa-compass"></i>こころざしの学校
             </a>
 
             <a href="#" class="link-btn">
-                <i class="fas fa-school"></i>
-                オンライン寺子屋「ほーむBASE」
+                <i class="fas fa-school"></i>オンライン寺子屋「ほーむBASE」 <span class="badge-ready">(準備中)</span>
             </a>
 
             <a href="https://www.instagram.com/toyama_seibu_bc/" class="link-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-baseball-bat-ball"></i>
-                富山西部ベースボールクラブ
+                <i class="fas fa-baseball-bat-ball"></i>富山西部ベースボールクラブ
             </a>
 
             <a href="https://jp.mercari.com/user/profile/438724002" class="link-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-shirt"></i>
-                古着屋MEGURI
+                <i class="fas fa-shirt"></i>古着屋MEGURI
             </a>
             
         </div>
 
-        <footer>
-            &copy; 2026 未来志創プロジェクト
-        </footer>
+        <footer>&copy; 2026 未来志創プロジェクト</footer>
     </div>
 
+    <!-- 動画自動再生用 ポップアップモーダル -->
+    <div class="modal-overlay" id="video-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <video id="intro-video" controls playsinline>
+                <source src="自己紹介動画.mp4" type="video/mp4">
+                お使いのブラウザは動画の再生に対応していません。
+            </video>
+        </div>
+    </div>
+
+    <!-- 動画の自動再生＆制御 JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoTrigger = document.getElementById('video-trigger');
+            const videoModal = document.getElementById('video-modal');
+            const closeModalBtn = document.getElementById('modal-close-btn');
+            const introVideo = document.getElementById('intro-video');
+
+            // 「けいいち先生のあゆみ」をタップした時の処理
+            videoTrigger.addEventListener('click', (e) => {
+                e.preventDefault(); // 通常のリンク移動をキャンセル
+                videoModal.classList.add('active');
+                introVideo.currentTime = 0;
+                introVideo.play(); // 自動再生
+            });
+
+            // 閉じる処理（バツボタン）
+            closeModalBtn.addEventListener('click', () => {
+                videoModal.classList.remove('active');
+                introVideo.pause();
+            });
+
+            // 閉じる処理（背景黒い部分をタップ）
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    videoModal.classList.remove('active');
+                    introVideo.pause();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
